@@ -74,13 +74,27 @@ public class MovieRepository {
     public void deleteDirector(String director){
         // your code here
         if(directorMap.containsKey(director) ){
+            if(directorMovieMapping.containsKey(director)){
+                for(String movieName : directorMovieMapping.get(director)){
+                    movieMap.remove(movieName);
+                }
+                directorMovieMapping.remove(director);
+            }
             directorMap.remove(director);
         }
+
     }
 
     public void deleteAllDirector(){
         // your code here
+        for (String directorName : directorMap.keySet()){
+            if(directorMovieMapping.containsKey(directorName)){
+                for(String movieName : directorMovieMapping.get(directorName)){
+                    movieMap.remove(movieName);
+                }
+                directorMovieMapping.remove(directorName);
+            }
+        }
         directorMap.clear();
-
     }
 }
